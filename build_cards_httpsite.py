@@ -6,7 +6,7 @@ import anki.sched
 
 load_dotenv()
 PROFILE_HOME = os.getenv("ANKI_PATH")
-OUTPUT_DIRECTORY = "/home/noah/gits/auto_anki/out"
+OUTPUT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))+'/out'
 
 # Utility methods
 
