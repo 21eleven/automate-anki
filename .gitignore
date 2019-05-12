@@ -1,4 +1,4 @@
 .env
 anki/
 out/
-
+__pycache__/
