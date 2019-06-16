@@ -19,7 +19,7 @@ print(cpath)
 col = Collection(cpath, log=True) # Entry point to the API
 
 def update_note_field(note, field, new_value):
-    note.field[field] = new_value
+    note[field] = new_value
     note.flush()
     col.save()
 
@@ -29,7 +29,6 @@ for cid in col.findNotes("tag:colors"):
     note = col.getNote(cid)
     for (name, value) in note.items():
         print(name, value)
-    update_note_field(note, "Back", "black!")
     break
 
 
