@@ -22,7 +22,13 @@ col = Collection(cpath, log=True) # Entry point to the API
 #for cid in col.findNotes("tag:English"): 
 for cid in col.findNotes("tag:colors"): 
     note = col.getNote(cid)
-    front =  note.fields[0] # "Front" is the first field of these cards
-    name = note.fields[1]
-    print(name)
+    for (name, value) in note.items():
+        print(name, value)
+    note["Back"]= value + "black!"
+    note.flush()
+    for (name, value) in note.items():
+        print(name, value)
+    break
+
+col.save()
 
