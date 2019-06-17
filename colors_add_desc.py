@@ -1,5 +1,6 @@
 import sys, os
 from dotenv import load_dotenv
+import colorhexa as ch
 
 sys.path.append("anki")
 import anki
@@ -27,8 +28,26 @@ def update_note_field(note, field, new_value):
 #for cid in col.findNotes("tag:English"): 
 for cid in col.findNotes("tag:colors"): 
     note = col.getNote(cid)
+    
     for (name, value) in note.items():
-        print(name, value)
-    break
+        if name == "Front":
+            color = (
+                    value.lower()
+                         .split("src='")[-1]
+                         .split('.png')[0]
+                         .replace('-', ' ')
+                         .replace('_', ' ')
+                    )
+            print(color)
+    try:
+        description = "\n<br><tiny>" + ''.join(
+            ch.get_color_desc(color).split(" color description :")
+        ) + "</tiny>"
+        print(description)
+        update_note_field(note, "Back", 
+                          color + description)
+    except IndexError:
+        pass
+    print('/////////////////////////////////')
 
 
