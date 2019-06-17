@@ -7,7 +7,8 @@ def get_color_desc(color):
     res = requests.post(colorhexa_url, data={'color-picker': '', 'c': color, 'h': 'h'})
     soup = BeautifulSoup(res.text, 'html.parser')
     desc = soup.find_all("div", {"class" :"color-description"})
-    print(desc)
+    assert len(desc) == 1
+    return "#" + desc[0].text.strip().split('#')[-1]
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
